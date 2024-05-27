@@ -8,3 +8,9 @@
 
 
 ![Screenshot_20240518_123153_Samsung Notes](https://github.com/sahilmakhijani/bootcamp/assets/121928589/c897a0ad-64cc-4696-9d36-5235c1e91c5c)
+
+The 12 Codd Rules understood extensively.
+What is Normalization?
+
+Installed Laragon and Dbeaver.
+Added Tables and data
