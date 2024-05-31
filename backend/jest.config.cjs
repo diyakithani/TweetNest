@@ -30,6 +30,7 @@ const config = {
     "!**/test/fixture/**/*.[jt]s?(x)",
     "**/?(*.)+(spec|test).[tj]s?(x)",
   ],
+  setupFiles: ["dotenv/config"],
   moduleNameMapper: { "src/(.*)": "<rootDir>/src/$1" },
 };
 
