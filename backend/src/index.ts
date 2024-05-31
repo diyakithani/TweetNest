@@ -1,9 +1,12 @@
-#!/usr/bin/env node
-
 import 'dotenv/config';
+import express from 'express';
 
-const main = async () => {
-    console.log("hello Node.js and Typescript world :]");
-};
+const app = express();
+app.get('/', (_req, res) => {
+    res.send('Hello World!');
+});
 
-main();
+const port = process.env.PORT;
+app.listen(port, () => {
+    console.log(`Express app listening on port ${port}`);
+});
