@@ -10,7 +10,7 @@
     "bundle": "rimraf dist && tsc",
     "compile": "tsc",
     "compile:watch": "tsc -w",
-    "dev": "nodemon --watch src --watch test --ext ts,json --exec 'npm run bundle && npm start'",
+    "dev": "nodemon --watch src --watch test --ext ts,json --exec \"npm run bundle && npm start\"",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint . --fix",
