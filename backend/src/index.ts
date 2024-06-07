@@ -20,11 +20,12 @@ app.get('/hello',(req,res)=>{
     return res.send("Hello "+req.query.name);
 });
 
-app.get('/artists', async (_req, res) => {
-    const db = await connect();
-    const artists = await db.query('select * from artist');
-    res.json(artists);
+app.get('/posts', async(_req, res) => {
+    const db= await connect();
+    const posts= await db.query('select * from user_posts where parent_post_id IS NULL');
+    res.json(posts[0]);
 });
+
 
 const port = process.env.PORT;
 app.listen(port, () => {
