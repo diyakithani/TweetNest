@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/posts", async (_req, res) => {
   const db = await connect(); // TODO - some stuff sahil said- error handling with db
   const posts = await db.query(
-    "select * from user_posts where parent_post_id IS NULL"
+    "select * from user_posts where parent_post_id IS NULL" //getting all the parent posts
   );
   res.json(posts[0]);
 });
