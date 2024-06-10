@@ -4,7 +4,7 @@ import { connect } from "./../db";
 const router = express.Router();
 
 router.get("/posts", async (_req, res) => {
-  const db = await connect(); //todo - some stuff sahil said
+  const db = await connect(); // TODO - some stuff sahil said- error handling with db
   const posts = await db.query(
     "select * from user_posts where parent_post_id IS NULL"
   );
@@ -25,6 +25,7 @@ router.post("/posts", async (req, res) => {
     return res.send("user id invalid");
   }
   const np = db.query(
+    // TODO sanitize user inputs
     "insert into user_posts(user_id,content) values (" +
       req.body.user_id +
       "," +
