@@ -12,7 +12,6 @@ router.get("/posts", async (_req, res) => {
 });
 
 router.post("/posts", async (req, res) => {
-  const db = await connect();
   if (
     typeof req.body.content !== "string" ||
     req.body.content.trim().length === 0
@@ -24,6 +23,7 @@ router.post("/posts", async (req, res) => {
     res.status(400);
     return res.send("user id invalid");
   }
+  const db = await connect();
   const np = db.query(
     // TODO sanitize user inputs
     "insert into user_posts(user_id,content) values (" +
