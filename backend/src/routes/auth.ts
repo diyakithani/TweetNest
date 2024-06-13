@@ -1,5 +1,6 @@
 import express from "express";
 import { connect } from "./../db";
+import { User } from "src/models/user";
 
 const router = express.Router();
 
@@ -37,6 +38,23 @@ router.post("/signup", async (req, res) => {
     ]
   );
   res.json(newuser);
+});
+router.post("/login", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  const db = await connect();
+  const user = await db.query<User[]>(
+    "Select username,password from users where username=?",
+    [username]
+  );
+  if (user[0][0]?.password == password) {
+    req.session.username = username;
+    res.status(200);
+    res.send("LOGIN SUCCESSFUL");
+  } else {
+    res.status(401);
+    res.send("Wrong stuff u entered bro");
+  }
 });
 
 export default router;

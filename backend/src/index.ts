@@ -19,7 +19,7 @@ app.use(
 // Augment express-session with a custom SessionData object
 declare module "express-session" {
   interface SessionData {
-    //bruh
+    username: string;
     views: number;
   }
 }
