@@ -6,4 +6,5 @@ export interface User extends RowDataPacket {
   email: string;
   birthday: string;
   pfp_path: string;
+  user_id: number;
 }

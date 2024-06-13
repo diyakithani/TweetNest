@@ -44,11 +44,11 @@ router.post("/login", async (req, res) => {
   const password = req.body.password;
   const db = await connect();
   const user = await db.query<User[]>(
-    "Select username,password from users where username=?",
+    "Select username,password,user_id from users where username=?",
     [username]
   );
   if (user[0][0]?.password == password) {
-    req.session.username = username;
+    req.session.uid = user[0][0]?.user_id;
     res.status(200);
     res.send("LOGIN SUCCESSFUL");
   } else {
@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("logout", (req, res) => {
-  req.session.username = undefined;
+  req.session.uid = undefined;
   res.send("LOGOUT SUCCESFUL");
 });
 
