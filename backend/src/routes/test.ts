@@ -33,4 +33,12 @@ router.get("/views", function (req, res) {
   }
 });
 
+router.get("/currentuserid", (req, res) => {
+  if (req.session.uid == undefined) {
+    res.status(401);
+    return res.send("UNAUTHORIZED ACCESS");
+  }
+  return res.send(req.session.uid);
+});
+
 export default router;
