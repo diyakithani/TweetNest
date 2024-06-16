@@ -10,7 +10,7 @@ router.get("/posts", async (_req, res) => {
   );
   res.json(posts[0]);
 });
-
+//create post
 router.post("/posts", async (req, res) => {
   if (
     typeof req.body.content !== "string" ||
@@ -25,15 +25,9 @@ router.post("/posts", async (req, res) => {
   }
   const db = await connect();
   const np = db.query(
-    // TODO sanitize user inputs
-    "insert into user_posts(user_id,content) values (" +
-      req.body.user_id +
-      "," +
-      '"' +
-      req.body.content +
-      '"' +
-      ");"
-  ); //good
+    "insert into user_posts(user_id,content) values (? , ?)",
+    [req.body.user_id, req.body.content]
+  );
   res.json(np);
 });
 
