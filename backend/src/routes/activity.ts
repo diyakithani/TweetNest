@@ -23,7 +23,7 @@ router.post("/posts", async (req, res) => {
     return res.send("MAKE A POST WITH ACTUAL CONTENT ON MY PLATFORM!!!");
   }
   const db = await connect();
-  const np = db.query(
+  const np = await db.query(
     "insert into user_posts(user_id,content) values (? , ?)",
     [req.session.uid, req.body.content]
   );
