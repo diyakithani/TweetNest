@@ -12,6 +12,9 @@ router.get("/posts", async (_req, res) => {
 });
 //create post
 router.post("/posts", async (req, res) => {
+  if (req.session.uid === undefined) {
+    return res.status(403).send("USER AUTHENTICATION SUS AF NGL ONGOD");
+  }
   if (
     typeof req.body.content !== "string" ||
     req.body.content.trim().length === 0
@@ -19,14 +22,10 @@ router.post("/posts", async (req, res) => {
     res.status(400); //invalid argument
     return res.send("MAKE A POST WITH ACTUAL CONTENT ON MY PLATFORM!!!");
   }
-  if (typeof req.body.user_id !== "number") {
-    res.status(400);
-    return res.send("user id invalid");
-  }
   const db = await connect();
   const np = db.query(
     "insert into user_posts(user_id,content) values (? , ?)",
-    [req.body.user_id, req.body.content]
+    [req.session.uid, req.body.content]
   );
   res.json(np);
 });
