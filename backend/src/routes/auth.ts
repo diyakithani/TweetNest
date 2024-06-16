@@ -57,7 +57,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("logout", (req, res) => {
+router.get("/logout", (req, res) => {
   req.session.uid = undefined;
   res.send("LOGOUT SUCCESFUL");
 });
