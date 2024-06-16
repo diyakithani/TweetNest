@@ -47,8 +47,8 @@ router.post("/login", async (req, res) => {
     "Select username,password,user_id from users where username=?",
     [username]
   );
-  if (user[0][0]?.password == password) {
-    req.session.uid = user[0][0]?.user_id;
+  if (user[0][0] != undefined && user[0][0].password == password) {
+    req.session.uid = user[0][0].user_id;
     res.status(200);
     res.send("LOGIN SUCCESSFUL");
   } else {
