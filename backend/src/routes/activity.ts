@@ -24,8 +24,8 @@ router.post("/posts", async (req, res) => {
   }
   const db = await connect();
   const np = await db.query(
-    "insert into user_posts(user_id,content) values (? , ?)",
-    [req.session.uid, req.body.content]
+    "insert into user_posts(user_id,content, parent_post_id) values (? , ?, ?)",
+    [req.session.uid, req.body.content, req.body.parent_post_id ?? null]
   );
   res.json(np);
 });
