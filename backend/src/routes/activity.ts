@@ -78,4 +78,38 @@ router.put("/like", async (req, res) => {
   }
 });
 
+//follow endpoint
+router.put("/follow", async (req, res) => {
+  if (typeof req.session.uid !== "number") {
+    return res
+      .status(403)
+      .send("USER AUTHENTICATION SUS AF NGL ONGOD NOT COOL BRUH");
+  }
+  if (typeof req.body.user_id !== "number") {
+    return res.status(400).send("NO USER ID :(");
+  }
+  const db = await connect();
+  const f = await db.query(
+    "select * from user_followers where follower=? and followed=?",
+    [req.session.uid, req.body.user_id]
+  );
+  if ((f[0] as []).length === 0) {
+    try {
+      await db.query(
+        "insert into user_followers(follower, followed) values(?,?)",
+        [req.session.uid, req.body.user_id]
+      );
+      return res.send("FOLLOWER ADDED ");
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  } else {
+    await db.query(
+      "delete from user_followers where follower=? and followed=?",
+      [req.session.uid, req.body.user_id]
+    );
+    return res.send("Follower REMOVED");
+  }
+});
+
 export default router;
