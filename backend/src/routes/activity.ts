@@ -47,13 +47,17 @@ router.put("/like", async (req, res) => {
     [req.session.uid, req.body.post_id]
   );
   if ((l[0] as []).length === 0) {
-    await db.query("insert into post_likes(post_id, user_id) values (?,?)", [
-      req.body.post_id,
-      req.session.uid,
-    ]);
-    return res.send(
-      req.session.uid + " liked " + req.body.post_id + " - post id"
-    );
+    try {
+      await db.query("insert into post_likes(post_id, user_id) values (?,?)", [
+        req.body.post_id,
+        req.session.uid,
+      ]);
+      return res.send(
+        req.session.uid + " liked " + req.body.post_id + " - post id"
+      );
+    } catch (err) {
+      return res.status(400).json(err);
+    }
   } else {
     await db.query("delete from post_likes where post_id=? and user_id=?", [
       req.body.post_id,
