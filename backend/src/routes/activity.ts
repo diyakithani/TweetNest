@@ -3,14 +3,23 @@ import { connect } from "./../db";
 
 const router = express.Router();
 
+//get posts endpoint
 router.get("/posts", async (req, res) => {
+  //checks if user is logged in
   if (req.session.uid === undefined) {
     return res.status(403).send("USER AUTHENTICATION SUS AF NGL ONGOD");
   }
+
+  //pagination query parameters
+  const page_size = parseInt((req.query.pg_size as string) ?? "10");
+  const page_num = parseInt((req.query.pg_num as string) ?? "1");
+  const offset = (page_num - 1) * page_size;
+
   try {
     const db = await connect();
     const posts = await db.query(
-      "select * from user_posts where parent_post_id IS NULL" //getting all the parent posts
+      "select * from user_posts where parent_post_id IS NULL limit ? offset ?",
+      [page_size, offset] //getting all the parent posts
     );
     res.json(posts[0]);
   } catch (err) {
