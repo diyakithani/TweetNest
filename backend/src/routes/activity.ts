@@ -3,7 +3,10 @@ import { connect } from "./../db";
 
 const router = express.Router();
 
-router.get("/posts", async (_req, res) => {
+router.get("/posts", async (req, res) => {
+  if (req.session.uid === undefined) {
+    return res.status(403).send("USER AUTHENTICATION SUS AF NGL ONGOD");
+  }
   try {
     const db = await connect();
     const posts = await db.query(
