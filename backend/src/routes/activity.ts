@@ -15,13 +15,23 @@ router.get("/posts", async (req, res) => {
   const page_num = parseInt((req.query.pg_num as string) ?? "1");
   const offset = (page_num - 1) * page_size;
 
+  const uid = req.query.uid; //at a specific user's page
+
   try {
     const db = await connect();
-    const posts = await db.query(
-      "select * from user_posts where parent_post_id IS NULL limit ? offset ?",
-      [page_size, offset] //getting all the parent posts
-    );
-    res.json(posts[0]);
+    if (uid === undefined) {
+      const posts = await db.query(
+        "select * from user_posts where parent_post_id IS NULL limit ? offset ?",
+        [page_size, offset] //getting all the parent posts
+      );
+      res.json(posts[0]);
+    } else {
+      const posts = await db.query(
+        "select * from user_posts where user_id= ? and parent_post_id IS NULL limit ? offset ?",
+        [parseInt(uid as string), page_size, offset] //getting all the parent posts
+      );
+      res.json(posts[0]);
+    }
   } catch (err) {
     res.status(500).send("internal server error");
   }
