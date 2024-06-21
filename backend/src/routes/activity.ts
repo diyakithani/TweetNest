@@ -134,4 +134,32 @@ router.put("/follow", async (req, res) => {
   }
 });
 
+//get followers endpoint
+router.get("/followers", async (req, res) => {
+  const f = req.query.uid ?? req.session.uid;
+  if (f === undefined) {
+    return res.status(403).send("abe kya chalray");
+  }
+  const db = await connect();
+  const dbresult = await db.query(
+    "select follower from user_followers where followed=?",
+    [f]
+  );
+  return res.json(dbresult[0]);
+});
+
+//get following endpoint
+router.get("/following", async (req, res) => {
+  const f = req.query.uid ?? req.session.uid;
+  if (f === undefined) {
+    return res.status(403).send("abe kya chalray");
+  }
+  const db = await connect();
+  const dbresult = await db.query(
+    "select users.username from user_followers join users on user_followers.followed=users.user_id where follower=?",
+    [f]
+  );
+  return res.json(dbresult[0]);
+});
+
 export default router;
