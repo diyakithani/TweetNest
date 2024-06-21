@@ -100,6 +100,28 @@ router.put("/like", async (req, res) => {
   }
 });
 
+//Delete post endpoint
+router.delete("/posts/:post_id", async (req, res) => {
+  const id = parseInt(req.params.post_id);
+  if (typeof req.session.uid !== "number") {
+    return res
+      .status(403)
+      .send("USER AUTHENTICATION SUS AF NGL ONGOD NOT COOL BRUH");
+  }
+  const db = await connect();
+  const p = await db.query(
+    "select * from user_posts where user_id=? and post_id=?",
+    [req.session.uid, id]
+  );
+  if ((p[0] as []).length == 0) {
+    return res.status(401).send("cannot delete");
+  }
+  await db.query("delete from user_posts where post_id=?", [id]);
+  return res.send(
+    "deleted!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! your post has ceased to exist"
+  );
+});
+
 //follow endpoint
 router.put("/follow", async (req, res) => {
   if (typeof req.session.uid !== "number") {
