@@ -5,9 +5,13 @@ import { useState } from 'react';
 export default function SecretLang() {
     const [text, setText] = useState("");
 
-    const encode = (text: string) => text.replace(/\s+/g, " ").split(" ").map(word =>
-        word.slice(undefined, word.length / 2) + "nte" + word.slice(word.length / 2)
-    ).join(" ");
+    function encode(text: string) {
+        return text
+            .replace(/\s+/g, " ")
+            .split(" ")
+            .map(word => word.slice(undefined, word.length / 2) + "nte" + word.slice(word.length / 2))
+            .join(" ");
+    }
 
     return (
         <Container>
