@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export default function ReactState() {
-    var [counter, setCounter] = useState(0);
+function ReactState() {
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
         alert("hello");
@@ -14,7 +14,11 @@ export default function ReactState() {
     return (
         <div>
             <h1 className="title">Diya slay</h1>
-            <button onClick={count}>{counter * 2}</button>
+            <button onClick={count}>Increment</button>
+            <hr />
+            <p>Counter: {counter}</p>
         </div>
     );
 }
+
+export default ReactState;
