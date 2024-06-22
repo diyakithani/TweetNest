@@ -18,6 +18,8 @@ export default function diyaaaaaaaaaaa() {
                 setdancingshinchan(false);
             }
         });
+        addEventListener("touchstart", () => setdancingshinchan(true));
+        addEventListener("touchend", () => setdancingshinchan(false));
     }, [])
 
 
