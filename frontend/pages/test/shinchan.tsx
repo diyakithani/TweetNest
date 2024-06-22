@@ -26,6 +26,7 @@ export default function Shinchan() {
     if (dancingshinchan) {
         return (
             <div>
+                <audio autoPlay src="/assets/shinchan_theme_song.mp3" />
                 <img src="https://i.pinimg.com/originals/b3/55/b9/b355b9d38b108b906eed4ee36d7b31da.gif" height="500px" width="500px" />
                 <h1>shinchan is dancing</h1>
             </div>
