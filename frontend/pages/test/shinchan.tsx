@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default function diyaaaaaaaaaaa() {
+export default function Shinchan() {
 
     const [dancingshinchan, setdancingshinchan] = useState(false);
 
