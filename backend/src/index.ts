@@ -4,6 +4,7 @@ import session from "express-session";
 import test from "./routes/test";
 import auth from "./routes/auth";
 import activity from "./routes/activity";
+import cors from "cors";
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
+app.use(cors()); // Cross Origin Request Enabler
 
 // Augment express-session with a custom SessionData object
 declare module "express-session" {
