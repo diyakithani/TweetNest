@@ -9,7 +9,7 @@
 
 
   }
-  #TODO change the background image to feather logo and align the login box, some change to color would be nice 
+  /* TODO change the background image to feather logo and align the login box, some change to color would be nice  */
   
   .form {
     border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
