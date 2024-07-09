@@ -1,6 +1,7 @@
 import express from "express";
 import { connect } from "./../db";
 import { User } from "src/models/user";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.post("/signup", async (req, res) => {
     "Insert into users values(?,?,?,?,?,DEFAULT)",
     [
       req.body.username,
-      req.body.password, //TODO BCRYPT DEKH HASH KRNA HAI
+      await bcrypt.hash(req.body.password, 10),
       req.body.email,
       req.body.birthday,
       req.body.pfp_path,
@@ -47,7 +48,10 @@ router.post("/login", async (req, res) => {
     "Select username,password,user_id from users where username=?",
     [username]
   );
-  if (user[0][0] != undefined && user[0][0].password == password) {
+  if (
+    user[0][0] != undefined &&
+    (await bcrypt.compare(password, user[0][0].password))
+  ) {
     req.session.uid = user[0][0].user_id;
     res.status(200);
     res.send("LOGIN SUCCESSFUL");
