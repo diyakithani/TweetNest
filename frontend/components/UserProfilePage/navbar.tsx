@@ -29,7 +29,6 @@ import {
     IconPhoto
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
-import Tweet from './Tweet';
 
 const user = {
     name: 'Jane Spoonfighter',
