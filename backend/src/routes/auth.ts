@@ -5,12 +5,6 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-// TODO
-// login
-// logout
-// register
-// hashing using bcrypt
-
 router.post("/signup", async (req, res) => {
   if (
     typeof req.body.username != "string" ||
@@ -40,6 +34,7 @@ router.post("/signup", async (req, res) => {
   );
   res.json(newuser);
 });
+
 router.post("/login", async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
