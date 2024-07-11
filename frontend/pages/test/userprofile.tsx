@@ -1,5 +1,5 @@
 import { GridComp } from '@/components/UserProfilePage/gridcomp'
-import { Navbar } from '@/components/UserProfilePage/navbar'
+import { Navbar } from '@/components/HomePage/navbar'
 import React from 'react'
 
 function userprofile() {
