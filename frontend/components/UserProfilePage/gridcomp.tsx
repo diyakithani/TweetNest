@@ -1,6 +1,8 @@
 import { Container, Grid, SimpleGrid, Skeleton, px, rem, Text, Box, Center } from '@mantine/core';
 import Usercard from './usercard';
 import { withRouter } from 'next/router';
+import { Innernav } from './innernav';
+import Tweet from '../HomePage/Tweet';
 
 const PRIMARY_COL_HEIGHT = rem(300);
 
@@ -9,28 +11,19 @@ export function GridComp() {
 
     return (
         <Container my="md" >
-            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="xs" >
+            <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="md" > {/*how do i align this*/}
                 <Box h={800} w={450} bg="white" >
-
-
-                    <Usercard ></Usercard>
-
-
-
+                    <Usercard></Usercard>
                 </Box>
-
-
 
                 <Grid gutter="md">
                     <Grid.Col>
-                        <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
+                        <Box h={800} w={450} bg="black" >
+                            <Innernav></Innernav>
+                            {[...Array(100)].map((e, i) => <Tweet />)}
+                        </Box>
                     </Grid.Col>
-                    <Grid.Col span={6}>
-                        <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-                    </Grid.Col>
-                    <Grid.Col span={6}>
-                        <Skeleton height={SECONDARY_COL_HEIGHT} radius="md" animate={false} />
-                    </Grid.Col>
+
                 </Grid>
             </SimpleGrid>
         </Container>
