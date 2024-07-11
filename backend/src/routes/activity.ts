@@ -1,15 +1,12 @@
 import express from "express";
 import { connect } from "./../db";
+import { authenticate } from "../middlewares/authenticate";
 
 const router = express.Router();
+router.use(authenticate);
 
 //get posts endpoint
 router.get("/posts", async (req, res) => {
-  //checks if user is logged in
-  if (req.session.uid === undefined) {
-    return res.status(403).send("USER AUTHENTICATION SUS AF NGL ONGOD");
-  }
-
   //pagination query parameters
   const page_size = parseInt((req.query.pg_size as string) ?? "10");
   const page_num = parseInt((req.query.pg_num as string) ?? "1");
@@ -39,9 +36,6 @@ router.get("/posts", async (req, res) => {
 
 //create post
 router.post("/posts", async (req, res) => {
-  if (req.session.uid === undefined) {
-    return res.status(403).send("USER AUTHENTICATION SUS AF NGL ONGOD");
-  }
   if (
     typeof req.body.content !== "string" ||
     req.body.content.trim().length === 0
@@ -59,11 +53,6 @@ router.post("/posts", async (req, res) => {
 
 //like post endpoint
 router.put("/like", async (req, res) => {
-  if (req.session.uid == undefined) {
-    return res
-      .status(403)
-      .send("USER AUTHENTICATION SUS AF NGL ONGOD NOT COOL");
-  }
   if (typeof req.body.post_id !== "number") {
     return res.status(400).send("No post id");
   }
@@ -103,11 +92,6 @@ router.put("/like", async (req, res) => {
 //Delete post endpoint
 router.delete("/posts/:post_id", async (req, res) => {
   const id = parseInt(req.params.post_id);
-  if (typeof req.session.uid !== "number") {
-    return res
-      .status(403)
-      .send("USER AUTHENTICATION SUS AF NGL ONGOD NOT COOL BRUH");
-  }
   const db = await connect();
   const p = await db.query(
     "select * from user_posts where user_id=? and post_id=?",
@@ -124,11 +108,6 @@ router.delete("/posts/:post_id", async (req, res) => {
 
 //follow endpoint
 router.put("/follow", async (req, res) => {
-  if (typeof req.session.uid !== "number") {
-    return res
-      .status(403)
-      .send("USER AUTHENTICATION SUS AF NGL ONGOD NOT COOL BRUH");
-  }
   if (typeof req.body.user_id !== "number") {
     return res.status(400).send("NO USER ID :(");
   }
@@ -159,9 +138,6 @@ router.put("/follow", async (req, res) => {
 //get followers endpoint
 router.get("/followers", async (req, res) => {
   const f = req.query.uid ?? req.session.uid;
-  if (f === undefined) {
-    return res.status(403).send("abe kya chalray");
-  }
   const db = await connect();
   const dbresult = await db.query(
     "select follower from user_followers where followed=?",
@@ -173,9 +149,6 @@ router.get("/followers", async (req, res) => {
 //get following endpoint
 router.get("/following", async (req, res) => {
   const f = req.query.uid ?? req.session.uid;
-  if (f === undefined) {
-    return res.status(403).send("abe kya chalray");
-  }
   const db = await connect();
   const dbresult = await db.query(
     "select users.username from user_followers join users on user_followers.followed=users.user_id where follower=?",
