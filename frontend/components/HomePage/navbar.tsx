@@ -60,7 +60,7 @@ export function Navbar() {
             <div className={classes.header}>
                 <Container className={classes.mainSection} size="md" color='blue' >
                     <Group justify="space-between">
-                        <IconFeather size={35} />
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}><Text style={{ fontFamily: "monospace", fontStyle: "italic", fontWeight: "bold", fontSize: 30 }} >Tweet-Nest</Text><IconFeather color="#ffffff" size={40} /></div>
                         <Tabs
                             defaultValue="Home"
                             variant="outline"
@@ -73,7 +73,6 @@ export function Navbar() {
                         >
                             <Tabs.List>{items}</Tabs.List>
                         </Tabs>
-
 
 
                         <Menu shadow="md" width={200}>
@@ -94,7 +93,6 @@ export function Navbar() {
                                     Logout
                                 </Menu.Item>
                             </Menu.Dropdown></Menu>
-
 
 
                         <Menu
@@ -118,6 +116,7 @@ export function Navbar() {
                                     </Group>
                                 </UnstyledButton>
                             </Menu.Target>
+
                             <Menu.Dropdown>
                                 <Menu.Item
                                     leftSection={
@@ -164,10 +163,6 @@ export function Navbar() {
                         </Menu>
                     </Group>
                 </Container>
-
-
-
-
             </div > </div>
     );
 }
