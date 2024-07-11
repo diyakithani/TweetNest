@@ -1,0 +1,50 @@
+.header {
+    background-color: #b4e1f0;
+    padding: 5px 0;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exploreText {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black; 
+    margin-bottom: 10px;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tabsList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab {
+    margin: 0 5px;
+    padding: 10px 15px;
+    font-weight: bold;
+    color: #333333;
+    &:hover {
+        background-color: light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+      }
+    
+      &[data-active] {
+        background-color: lightgoldenrodyellow;
+        border-color: 1px gray;
+        margin: 0;
+        padding: 10px 15px;
+        
+      }
+}
+
+.tabPaper {
+    margin: 5px;
+}
