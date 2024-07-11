@@ -15,22 +15,22 @@ export default function Tweet() {
     const theme = useMantineTheme();
 
     return (
-        <Card withBorder className={classes.card} m="lg">
+        <Card withBorder className={classes.card} m="md" pt={0} pl={0} >
             <Group justify="start" bg="#1DA1F2" >
                 <Avatar
                     src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
                     size={35}
                     radius="sm"
-                    mr="xs"
+                    mr="0"
                     m={0}
                     p={0}
                 />
-                <Text fz="md" m={0}>
+                <Text fz="lg" m={0}>
                     Bill Wormeater
                 </Text>
             </Group>
 
-            <Card.Section inheritPadding mt="xs">
+            <Card.Section inheritPadding mt="0">
                 <Image src="https://i.imgur.com/Cij5vdL.png" height={180} style={{ objectFit: 'contain' }} />
             </Card.Section>
 
