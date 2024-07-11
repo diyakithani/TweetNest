@@ -2,6 +2,7 @@ import express from "express";
 import { connect } from "./../db";
 import { User } from "src/models/user";
 import bcrypt from "bcrypt";
+import { authenticate } from "../middlewares/authenticate";
 
 const router = express.Router();
 
@@ -56,7 +57,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/logout", (req, res) => {
+router.get("/logout", authenticate, (req, res) => {
   req.session.uid = undefined;
   res.send("LOGOUT SUCCESFUL");
 });
