@@ -1,29 +1,10 @@
-import cx from 'clsx';
 import { useState } from 'react';
 import {
     Container,
-    Avatar,
-    UnstyledButton,
-    Group,
-    Text,
-    Menu,
     Tabs,
-    Burger,
-    rem,
     useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import {
-    IconLogout,
-    IconHeart,
-    IconStar,
-    IconMessage,
-    IconSettings,
-    IconPlayerPause,
-    IconTrash,
-    IconSwitchHorizontal,
-    IconChevronDown,
-} from '@tabler/icons-react';
 
 import classes from './innernav.module.css';
 
