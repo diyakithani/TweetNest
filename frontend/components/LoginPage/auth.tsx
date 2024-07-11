@@ -25,7 +25,7 @@ export default function Auth() {
         else {
             setUsername("");
             setPassword("");
-            alert("Invalid info bruhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+            alert("Invalid info bruh");
         }
 
     }
