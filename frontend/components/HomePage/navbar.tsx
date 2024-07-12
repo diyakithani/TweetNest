@@ -17,15 +17,10 @@ import { useDisclosure } from '@mantine/hooks';
 import {
     IconLogout,
     IconHeart,
-    IconStar,
     IconMessage,
     IconSettings,
-    IconPlayerPause,
-    IconTrash,
-    IconSwitchHorizontal,
     IconChevronDown,
     IconFeather,
-    IconMessageCircle,
     IconPhoto
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
