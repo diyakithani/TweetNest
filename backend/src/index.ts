@@ -16,7 +16,12 @@ app.use(
     cookie: { maxAge: 60000 },
   })
 );
-app.use(cors()); // Cross Origin Request Enabler
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+); // Cross Origin Request Enabler
 
 // Augment express-session with a custom SessionData object
 declare module "express-session" {
