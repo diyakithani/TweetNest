@@ -3,7 +3,7 @@ import { connect } from "./../db";
 import { authenticate } from "../middlewares/authenticate";
 
 const router = express.Router();
-router.use(authenticate);
+router.use(authenticate); //i love this middleware
 
 //get posts endpoint
 router.get("/posts", async (req, res) => {
@@ -155,6 +155,15 @@ router.get("/following", async (req, res) => {
     [f]
   );
   return res.json(dbresult[0]);
+});
+
+//get current user information
+router.get("/currentuser", async (req, res) => {
+  const db = await connect();
+  const result = await db.query("select * from users where user_id=?", [
+    req.session.uid,
+  ]);
+  return res.json((result[0] as any[])[0]);
 });
 
 export default router;
