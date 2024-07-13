@@ -25,6 +25,7 @@ import {
 } from '@tabler/icons-react';
 import classes from './navbar.module.css';
 import Tweet from './Tweet';
+import { useCurrentUser } from '@/utils/hooks';
 
 const user = {
     name: 'Jane Spoonfighter',
@@ -39,6 +40,8 @@ const tabs = [
 ];
 
 export function Navbar() {
+
+    const myuser = useCurrentUser();
     const theme = useMantineTheme();
     const [opened, { toggle }] = useDisclosure(false);
     const [userMenuOpened, setUserMenuOpened] = useState(false);
@@ -105,7 +108,7 @@ export function Navbar() {
                                     <Group gap={7}>
                                         <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
                                         <Text fw={500} size="sm" lh={1} mr={3}>
-                                            {user.name}
+                                            {myuser?.username}
                                         </Text>
                                         <IconChevronDown style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
                                     </Group>
