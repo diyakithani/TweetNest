@@ -1,3 +1,4 @@
+
 import cx from 'clsx';
 import { useState } from 'react';
 import {
@@ -26,6 +27,9 @@ import {
 import classes from './navbar.module.css';
 import Tweet from './Tweet';
 import { useCurrentUser } from '@/utils/hooks';
+import client from '@/utils/httpclient';
+import { useRouter } from 'next/router';
+
 
 const user = {
     name: 'Jane Spoonfighter',
@@ -39,8 +43,9 @@ const tabs = [
 
 ];
 
-export function Navbar() {
 
+export function Navbar() {
+    const router = useRouter();
     const myuser = useCurrentUser();
     const theme = useMantineTheme();
     const [opened, { toggle }] = useDisclosure(false);
@@ -51,6 +56,18 @@ export function Navbar() {
             {tab}
         </Tabs.Tab>
     ));
+
+
+    async function logout() {
+        const res = await client.get("/auth/logout");
+        if (res.status === 200) {
+            console.log("logged out");
+            router.push("/test/login");
+        }
+        else {
+            console.log("kuch to gadbad hai daya");
+        }
+    }
 
 
     return (
@@ -87,7 +104,7 @@ export function Navbar() {
                                 <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
                                     Account Settings
                                 </Menu.Item>
-                                <Menu.Item leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}>
+                                <Menu.Item onClick={() => { logout() }} leftSection={<IconLogout style={{ width: rem(14), height: rem(14) }} />}>
                                     Logout
                                 </Menu.Item>
                             </Menu.Dropdown></Menu>
@@ -149,7 +166,7 @@ export function Navbar() {
                                     Account settings
                                 </Menu.Item>
 
-                                <Menu.Item
+                                <Menu.Item onClick={() => { logout() }}
                                     leftSection={
                                         <IconLogout style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
                                     }
