@@ -37,11 +37,6 @@ const user = {
     image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
 };
 
-const tabs = [
-    'Home',
-    'Explore',
-
-];
 
 
 export function Navbar() {
@@ -51,11 +46,6 @@ export function Navbar() {
     const [opened, { toggle }] = useDisclosure(false);
     const [userMenuOpened, setUserMenuOpened] = useState(false);
 
-    const items = tabs.map((tab) => (
-        <Tabs.Tab value={tab} key={tab}>
-            {tab}
-        </Tabs.Tab>
-    ));
 
 
     async function logout() {
@@ -63,11 +53,21 @@ export function Navbar() {
         if (res.status === 200) {
             console.log("logged out");
             router.push("/test/login");
+
         }
         else {
             console.log("kuch to gadbad hai daya");
         }
     }
+
+    function home() {
+        router.push("/home");
+    }
+
+    function explore() {
+        router.push("/test/explore");
+    }
+
 
 
     return (
@@ -86,7 +86,8 @@ export function Navbar() {
                                 tab: classes.tab,
                             }}
                         >
-                            <Tabs.List>{items}</Tabs.List>
+                            <Tabs.List justify='center'><Tabs.Tab value="Home" onClick={() => { home() }}>Home</Tabs.Tab>
+                                <Tabs.Tab value="Explore" onClick={() => { explore() }}>Explore</Tabs.Tab></Tabs.List>
                         </Tabs>
 
 
