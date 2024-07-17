@@ -31,7 +31,7 @@ export const MyParticles = () => {
         () => ({
             background: {
                 color: {
-                    value: "#0d47a1",
+                    value: "#68cbf8",
                 },
             },
             fpsLimit: 120,
@@ -64,7 +64,7 @@ export const MyParticles = () => {
                     color: "#ffffff",
                     distance: 150,
                     enable: true,
-                    opacity: 0.5,
+                    opacity: 1,
                     width: 1,
                 },
                 move: {
@@ -74,7 +74,7 @@ export const MyParticles = () => {
                         default: OutMode.out,
                     },
                     random: false,
-                    speed: 6,
+                    speed: 3,
                     straight: false,
                 },
                 number: {
@@ -87,7 +87,7 @@ export const MyParticles = () => {
                     value: 0.5,
                 },
                 shape: {
-                    type: "circle",
+                    type: "square",
                 },
                 size: {
                     value: { min: 1, max: 5 },
