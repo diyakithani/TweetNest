@@ -18,7 +18,7 @@ router.get("/posts", async (req, res) => {
     const db = await connect();
     if (uid === undefined) {
       const posts = await db.query(
-        "select * from user_posts where parent_post_id IS NULL limit ? offset ?",
+        "select * from user_posts where parent_post_id IS NULL order by timestamp DESC limit ? offset ? ",
         [page_size, offset] //getting all the parent posts
       );
       res.json(posts[0]);
