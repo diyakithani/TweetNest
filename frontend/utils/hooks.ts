@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { User } from './types';
+import { Post, User } from './types';
 import client from './httpclient';
 import { useRouter } from 'next/router';
 
@@ -20,4 +20,16 @@ export const useCurrentUser = (required: boolean = true) => {
   }, []);
 
   return user;
+};
+
+export const useGetPosts = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  useEffect(() => {
+    client.get('/activity/posts').then((res) => {
+      if (res.status == 200) {
+        setPosts(res.data);
+      }
+    });
+  }, []);
+  return posts;
 };
