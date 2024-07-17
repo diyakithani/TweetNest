@@ -16,9 +16,6 @@ import { useRouter } from 'next/router';
 export default function Auth() {
     function signup() {
         router.push("/test/signup");
-
-
-
     }
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
