@@ -9,8 +9,14 @@ import {
     Anchor,
 } from '@mantine/core';
 import classes from './userdetails.module.css';
+import router, { useRouter } from 'next/router';
+import { useState } from 'react';
+import client from '@/utils/httpclient';
 
 export default function UserDetails() {
+    function gotologin() {
+        router.push("/test/login");
+    }
     return (
         <div className={classes.wrapper}>
             <Paper className={classes.form} radius={0} p={35}>
@@ -32,7 +38,7 @@ export default function UserDetails() {
 
                 <Text ta="center" mt="md">
                     Already have an account?{' '}
-                    <Anchor<'a'> href="#" fw={700} onClick={(event) => event.preventDefault()}>
+                    <Anchor<'a'> href="#" fw={700} onClick={() => gotologin()}>
                         Login Now! :)
                     </Anchor>
                 </Text>

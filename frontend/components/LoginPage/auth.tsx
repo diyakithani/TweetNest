@@ -14,6 +14,12 @@ import client from '@/utils/httpclient';
 import { useRouter } from 'next/router';
 
 export default function Auth() {
+    function signup() {
+        router.push("/test/signup");
+
+
+
+    }
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
@@ -45,7 +51,7 @@ export default function Auth() {
 
                 <Text ta="center" mt="md">
                     Don&apos;t have an account?{' '}
-                    <Anchor<'a'> href="#" fw={700} onClick={(event) => event.preventDefault()}>
+                    <Anchor<'a'> href="#" fw={700} onClick={() => signup()}>
                         Sign-Up Now! :)
                     </Anchor>
                 </Text>
