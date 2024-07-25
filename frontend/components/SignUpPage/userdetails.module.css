@@ -14,7 +14,7 @@
   /*TODO why does nothing affect the css*/
   
   .form {
-    border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+    border: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
     min-height: rem(750px);
     min-width: rem(500px);
     padding-top: rem(2px);

@@ -12,11 +12,10 @@ import classes from './userdetails.module.css';
 import router, { useRouter } from 'next/router';
 import { useState } from 'react';
 import client from '@/utils/httpclient';
+import { Formcomp } from './formcomp';
 
 export default function UserDetails() {
-    function gotologin() {
-        router.push("/test/login");
-    }
+
     return (
         <div className={classes.wrapper}>
             <Paper className={classes.form} radius={0} p={35}>
@@ -27,21 +26,7 @@ export default function UserDetails() {
                     Enter your details!
                 </Title>
 
-
-                <TextInput label="Enter your Email Address" placeholder="benlovesworms@gmail.com" size="md" mb="md" />
-                <TextInput label="Enter your Username" placeholder="ben_wormeater" size="md" mb="md"></TextInput>
-                <PasswordInput label="Enter your Password" placeholder="iloveworms" size="md" mb="md" />
-                <Checkbox label="Remember me" mb="md" size="md" />
-                <Button fullWidth mt="lg" size="md">
-                    Sign Up to Tweet-Nest🎉
-                </Button>
-
-                <Text ta="center" mt="md">
-                    Already have an account?{' '}
-                    <Anchor<'a'> href="#" fw={700} onClick={() => gotologin()}>
-                        Login Now! :)
-                    </Anchor>
-                </Text>
+                <Formcomp ></Formcomp>
             </Paper>
         </div >
     );
