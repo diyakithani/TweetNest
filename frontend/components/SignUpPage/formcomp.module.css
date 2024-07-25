@@ -1,0 +1,10 @@
+.form {
+    border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+    min-height: rem(500px);
+    min-width: rem(500px);
+    padding-top: rem(2px);
+    justify-content: center;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    
+  } 
