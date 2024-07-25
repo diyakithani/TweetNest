@@ -6,16 +6,14 @@ import { Container } from '@mantine/core'
 import React from 'react'
 
 export default function Home() {
+    const posts = useGetPosts();
 
     return (
-        <div>
+        <div style={{ backgroundColor: "#f2f2f2" }}>
             <Navbar></Navbar>
             <Container>
                 <CreatePost></CreatePost>
-                <Tweet></Tweet>
-
-
-
+                {posts.map((post) => <Tweet post={post}></Tweet>)}
             </Container>
 
 
