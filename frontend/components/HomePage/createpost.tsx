@@ -1,69 +1,32 @@
-import { Avatar, Container, Paper, Text, TextInput } from '@mantine/core'
-import { IconSend2 } from '@tabler/icons-react';
-import React from 'react'
+import { Avatar, Container, Paper, Text, Button, Group } from '@mantine/core';
+import React from 'react';
+import { useDisclosure } from '@mantine/hooks';
+import { ModalCreatePost } from './modalcreatepost';
+import { useCurrentUser } from '@/utils/hooks';
+
 const user = {
     name: 'Jane Spoonfighter',
     email: 'janspoon@fighter.dev',
     image: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png',
 };
 
-function CreatePost() {
+const CreatePost: React.FC = () => {
+    const myuser = useCurrentUser();
+    const [opened, { open, close }] = useDisclosure(false);
+
     return (
-        <Container mt="md" ml={-5} w="100%" >
-            <Paper bg="#add8e6" radius="xl" display="flex" w="100%">
+        <Container mt="md" w="100%">
+            <Paper p="md" radius="xl" shadow="sm" bg="#add8e6">
+                <Group display="flex-row" align="center" >
+                    <Avatar src={user.image} alt={user.name} radius="xl" size="10%" />
+                    <Text size="xl" style={{ flex: 1, textAlign: 'center', fontFamily: "monospace", fontWeight: "bolder" }}>{myuser?.username}, What's on your mind?</Text>
+                    <Button color="blue" onClick={open}>Tweet it out!</Button>
+                </Group>
+                <ModalCreatePost opened={opened} onClose={close} />
+            </Paper>
+        </Container>
+    );
+};
 
-                <Avatar src={user.image} alt={user.name} radius="xl" size={40} m="sm" />
-                <TextInput
-                    label="Create a Post"
-                    placeholder="What's on your mind?"
-                    size="xl"
-                    mb="md"
-                    mr={0}
-                    w="30%"
-                    radius="lg"
-                    mt="5px"
+export default CreatePost;
 
-
-
-                    styles={{
-                        input: {
-                            width: "100%",
-                            padding: "0px",
-                            fontSize: '100%',
-                            marginTop: "5px"
-
-                        },
-                        label: {
-                            margin: '0px',
-                            padding: "0px",
-                            marginBottom: '5px',
-                            width: '100%'
-                        }
-                    }}
-                />
-                <IconSend2
-                    style={{
-                        margin: "0",
-                        padding: "0",
-                        color: "black",
-                        width: "50px",
-                        height: "35px",
-                        alignItems: "flex-end",
-                        cursor: "pointer"
-
-
-
-
-
-
-                    }}></IconSend2>
-
-
-
-
-            </Paper >
-        </Container >
-    )
-}
-
-export default CreatePost
