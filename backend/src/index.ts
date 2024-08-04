@@ -13,7 +13,9 @@ app.use(express.json()); //middleware which converts req body to json
 app.use(
   session({
     secret: process.env.SESSION_SECRET ?? "",
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 10 * 60 * 1000 },
+
+    rolling: true,
   })
 );
 app.use(
