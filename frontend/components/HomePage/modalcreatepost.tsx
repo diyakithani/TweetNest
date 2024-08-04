@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { IconFeather, IconPhoto } from '@tabler/icons-react';
 import { useCurrentUser } from '@/utils/hooks';
 import client from '@/utils/httpclient';
+import { useRouter } from 'next/router';
 
 interface ModalCreatePostProps {
     opened: boolean;
@@ -12,6 +13,7 @@ interface ModalCreatePostProps {
 export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClose }) => {
     const myuser = useCurrentUser();
     const [text, setText] = useState("");
+    const router = useRouter();
 
     async function insertpost() {
         try {
@@ -19,6 +21,7 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
             console.log('Post created successfully:', response.data);
 
             onClose(); // Close the modal
+            router.reload();
         } catch (error: any) {
             console.error('Error creating post:', error);
             if (error.response && error.response.status === 401) {
