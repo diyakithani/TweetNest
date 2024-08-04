@@ -6,7 +6,7 @@ import { Container } from '@mantine/core'
 import React from 'react'
 
 export default function Home() {
-    const posts = useGetPosts();
+    const { posts, loading, error } = useGetPosts();
 
     return (
         <div style={{ backgroundColor: "#f2f2f2" }}>

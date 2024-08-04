@@ -13,4 +13,8 @@ export type Post = {
   content: string;
   media_path: string;
   timestamp: Date;
+  username: string;
+  email: string;
+  birthday: string;
+  pfp_path: string;
 };
