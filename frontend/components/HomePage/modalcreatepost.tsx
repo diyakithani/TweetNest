@@ -1,20 +1,34 @@
 import { Modal, Paper, Container, TextInput, Avatar, Group, Button, ActionIcon } from '@mantine/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { IconFeather, IconPhoto } from '@tabler/icons-react';
 import { useCurrentUser } from '@/utils/hooks';
+import client from '@/utils/httpclient';
 
 interface ModalCreatePostProps {
     opened: boolean;
     onClose: () => void;
 }
 
-
-
 export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClose }) => {
     const myuser = useCurrentUser();
+    const [text, setText] = useState("");
+
+    async function insertpost() {
+        try {
+            const response = await client.post("/activity/posts", { content: text });
+            console.log('Post created successfully:', response.data);
+
+            onClose(); // Close the modal
+        } catch (error: any) {
+            console.error('Error creating post:', error);
+            if (error.response && error.response.status === 401) {
+                alert('User not authenticated. Please log in.');
+            }
+        }
+    }
+
     return (
         <Modal
-
             opened={opened}
             onClose={onClose}
             centered
@@ -22,11 +36,9 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
             size="50vw"
             p="0"
             m="0"
-
-
         >
-            <Container p="0" m="0" >
-                <Paper bg="#add8e6" radius="xl" p="xl" m="0" shadow="sm" w="100%" h="100%" __size='100%'>
+            <Container p="0" m="0">
+                <Paper bg="#add8e6" radius="xl" p="xl" m="0" shadow="sm" w="100%" h="100%" __size="100%">
                     <Group align="flex-start">
                         <Avatar src={myuser?.pfp_path} alt={myuser?.username} radius="xl" size={60} />
                         <TextInput
@@ -34,17 +46,23 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
                             size="xl"
                             style={{ flex: 1 }}
                             radius="xl"
+                            onChange={(event) => setText(event.currentTarget.value)}
+                            value={text}
                         />
                     </Group>
-                    <Group mt="md" display="flex"  >
+                    <Group mt="md" display="flex">
                         <ActionIcon variant="outline" color="blue" size="xl">
                             <IconPhoto size={20} />
                         </ActionIcon>
-                        <Container p="0" m="0" >
-                            <Button color="blue" onClick={() => { }}>Tweet <IconFeather></IconFeather></Button></Container>
+                        <Container p="0" m="0">
+                            <Button color="blue" onClick={insertpost}>
+                                Tweet <IconFeather />
+                            </Button>
+                        </Container>
                     </Group>
                 </Paper>
             </Container>
-        </Modal >
+        </Modal>
     );
 };
+
