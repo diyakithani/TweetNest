@@ -37,7 +37,7 @@ export default function Tweet({ post }: TweetProps) {
             </Group>
 
             <Card.Section mt="0">
-                <Image src="https://i.imgur.com/Cij5vdL.png" height={180} style={{ objectFit: 'contain' }} />
+                <Image src={post.media_path} height={180} style={{ objectFit: 'contain' }} />
             </Card.Section>
 
             <Paper bg="lightgray" style={{ fontWeight: "bolder" }} radius="0" h="100%">
