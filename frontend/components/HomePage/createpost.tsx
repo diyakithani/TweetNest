@@ -18,7 +18,7 @@ const CreatePost: React.FC = () => {
         <Container mt="md" w="100%">
             <Paper p="md" radius="xl" shadow="sm" bg="#add8e6">
                 <Group display="flex-row" align="center" >
-                    <Avatar src={user.image} alt={user.name} radius="xl" size="10%" />
+                    <Avatar src={myuser?.pfp_path} alt={myuser?.username} radius="xl" size="10%" />
                     <Text size="xl" style={{ flex: 1, textAlign: 'center', fontFamily: "monospace", fontWeight: "bolder" }}>{myuser?.username}, What's on your mind?</Text>
                     <Button color="blue" onClick={open}>Tweet it out!</Button>
                 </Group>
