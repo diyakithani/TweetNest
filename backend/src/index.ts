@@ -5,6 +5,8 @@ import test from "./routes/test";
 import auth from "./routes/auth";
 import activity from "./routes/activity";
 import cors from "cors";
+import { Server } from "@tus/server";
+import { FileStore } from "@tus/file-store";
 
 const app = express();
 
@@ -32,6 +34,16 @@ declare module "express-session" {
     views: number;
   }
 }
+
+//tus server
+const uploadApp = express();
+const server = new Server({
+  path: "/uploads",
+  datastore: new FileStore({ directory: process.env.TUS_FILES! }),
+});
+
+uploadApp.all("*", server.handle.bind(server));
+app.use("/uploads", uploadApp);
 
 // Endpoints
 app.use("/test", test);

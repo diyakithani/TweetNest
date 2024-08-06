@@ -19,6 +19,8 @@
     "test": "jest --runInBand --detectOpenHandles ."
   },
   "dependencies": {
+    "@tus/file-store": "^1.4.0",
+    "@tus/server": "^1.7.0",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
