@@ -26,6 +26,7 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
     const myuser = useCurrentUser();
     const [text, setText] = useState("");
     const router = useRouter();
+    const [media_path, setmedia_path] = useState<string | null>(null)
 
     const [uppy, setUppy] = useState<Uppy | undefined>(undefined)
     useEffect(() => {
@@ -36,13 +37,14 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
             .use(Compressor)
             .on('upload-success', (file) => {
                 console.log(file);
+                setmedia_path(file?.tus?.uploadUrl ?? null);
             })
         setUppy(uppy)
     }, [])
 
     async function insertpost() {
         try {
-            const response = await client.post("/activity/posts", { content: text });
+            const response = await client.post("/activity/posts", { content: text, media_path: media_path });
             console.log('Post created successfully:', response.data);
 
             onClose(); // Close the modal
