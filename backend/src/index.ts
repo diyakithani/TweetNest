@@ -5,6 +5,7 @@ import test from "./routes/test";
 import auth from "./routes/auth";
 import activity from "./routes/activity";
 import cors from "cors";
+import companion from "@uppy/companion";
 
 const app = express();
 
@@ -25,6 +26,17 @@ app.use(
   })
 ); // Cross Origin Request Enabler
 
+//uppy companion
+const { app: companionApp } = companion.app({
+  server: {
+    host: process.env.HOST + ":" + process.env.PORT,
+    protocol: "http",
+    path: "/companion",
+  },
+  filePath: process.env.UPPY_FILE_PATH,
+});
+app.use("/companion", companionApp);
+
 // Augment express-session with a custom SessionData object
 declare module "express-session" {
   interface SessionData {
@@ -40,6 +52,8 @@ app.use("/activity", activity);
 
 // Start the server
 const port = process.env.PORT;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Express app listening on port ${port}`);
 });
+
+companion.socket(server);
