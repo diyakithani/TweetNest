@@ -30,7 +30,12 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
 
     const [uppy, setUppy] = useState<Uppy | undefined>(undefined)
     useEffect(() => {
-        const uppy = new Uppy()
+        const uppy = new Uppy({
+            restrictions: {
+                maxNumberOfFiles: 1,
+                allowedFileTypes: ['image/*', '.jpg', '.jpeg', '.png', '.gif']
+            }
+        })
             .use(Webcam)
             .use(Tus, { endpoint: 'http://localhost:3001/uploads/files' })
             .use(ImageEditor)
