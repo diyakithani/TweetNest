@@ -1,9 +1,21 @@
 import { Modal, Paper, Container, TextInput, Avatar, Group, Button, ActionIcon } from '@mantine/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IconFeather, IconPhoto } from '@tabler/icons-react';
 import { useCurrentUser } from '@/utils/hooks';
 import client from '@/utils/httpclient';
 import { useRouter } from 'next/router';
+import Uppy from '@uppy/core';
+import Webcam from '@uppy/webcam';
+import Dashboard from '@uppy/react/lib/Dashboard';
+import Tus from '@uppy/tus';
+import ImageEditor from '@uppy/image-editor';
+import Compressor from '@uppy/compressor';
+
+
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
+import '@uppy/webcam/dist/style.min.css';
+import '@uppy/image-editor/dist/style.min.css';
 
 interface ModalCreatePostProps {
     opened: boolean;
@@ -14,6 +26,19 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
     const myuser = useCurrentUser();
     const [text, setText] = useState("");
     const router = useRouter();
+
+    const [uppy, setUppy] = useState<Uppy | undefined>(undefined)
+    useEffect(() => {
+        const uppy = new Uppy()
+            .use(Webcam)
+            .use(Tus, { endpoint: 'http://localhost:3001/uploads/files' })
+            .use(ImageEditor)
+            .use(Compressor)
+            .on('upload-success', (file) => {
+                console.log(file);
+            })
+        setUppy(uppy)
+    }, [])
 
     async function insertpost() {
         try {
@@ -57,6 +82,7 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
                         <ActionIcon variant="outline" color="blue" size="xl">
                             <IconPhoto size={20} />
                         </ActionIcon>
+                        {uppy && <Dashboard uppy={uppy} plugins={['Webcam']} />}
                         <Container p="0" m="0">
                             <Button color="blue" onClick={insertpost}>
                                 Tweet <IconFeather />
