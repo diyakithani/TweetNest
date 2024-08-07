@@ -68,6 +68,10 @@ export function Navbar() {
         router.push("/test/explore");
     }
 
+    function gotoprofile() {
+        router.push("/test/userprofile");
+    }
+
 
 
     return (
@@ -96,7 +100,7 @@ export function Navbar() {
                                 <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
                             </Menu.Target>
                             <Menu.Dropdown>
-                                <Menu.Item leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>
+                                <Menu.Item onClick={() => { gotoprofile() }} leftSection={<IconPhoto style={{ width: rem(14), height: rem(14) }} />}>
                                     Your Profile
                                 </Menu.Item>
                                 <Menu.Item leftSection={<IconHeart style={{ width: rem(14), height: rem(14) }} />}>
@@ -138,8 +142,10 @@ export function Navbar() {
 
                             <Menu.Dropdown>
                                 <Menu.Item
+                                    onClick={() => { gotoprofile() }}
                                     leftSection={
                                         <IconPhoto
+
                                             style={{ width: rem(16), height: rem(16) }}
                                             color={theme.colors.red[6]}
                                             stroke={1.5}
