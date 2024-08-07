@@ -162,6 +162,17 @@ router.get("/following", async (req, res) => {
   return res.json(dbresult[0]);
 });
 
+//follower count
+router.get("/followercount", async (req, res) => {
+  const f = req.query.uid ?? req.session.uid;
+  const db = await connect();
+  const dbresult = await db.query(
+    "select count(*) from user_followers where follower=?",
+    [f]
+  );
+  return res.json(dbresult[0]);
+});
+
 //get current user information
 router.get("/currentuser", async (req, res) => {
   const db = await connect();
