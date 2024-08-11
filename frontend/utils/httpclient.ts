@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const client = axios.create({
   withCredentials: true,
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://tweetnest.appsinfra.in/',
   validateStatus: (status) => status != 500,
 });
 
