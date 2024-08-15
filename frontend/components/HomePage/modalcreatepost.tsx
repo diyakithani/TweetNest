@@ -37,7 +37,7 @@ export const ModalCreatePost: React.FC<ModalCreatePostProps> = ({ opened, onClos
             }
         })
             .use(Webcam)
-            .use(Tus, { endpoint: 'http://localhost:3001/uploads/files' })
+            .use(Tus, { endpoint: 'https://tweetnest.appsinfra.in/uploads/files' })
             .use(ImageEditor)
             .use(Compressor)
             .on('upload-success', (file) => {
