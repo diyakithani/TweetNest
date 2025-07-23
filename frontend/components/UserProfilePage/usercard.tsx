@@ -17,12 +17,13 @@ function Usercard() {
     const items = stats.map((stat) => (
         <div key={stat.label}>
             <Text ta="center" fz="lg" fw={500}>
-                {stat.value}
+                {JSON.stringify(stat.value)}
+
             </Text>
             <Text ta="center" fz="sm" lh={1}>
                 {stat.label}
             </Text>
-        </div>
+        </div >
     ));
     const block = (title: string, value: string, IconComponent: React.ElementType) => (
         <Container my="xl" display="flex" p={8} pl={0} >
@@ -47,7 +48,7 @@ function Usercard() {
                 {items}
             </Group>
             <Text c="black" ta="left" fz="h4" m="sm" style={{ fontSize: '1em', fontWeight: 'bold', color: 'black' }}>Name: <span style={{ fontSize: '1em', fontWeight: 'bold', color: 'black' }}>Billa Lover</span></Text>
-            {block("BIO: ", "Hi I have a raging god complex and I love to brag about myself. Occasionally, I like to eat worms.", FcRules)}
+            {block("BIO: ", "Hi I love cycling and hitting the gym.", FcRules)}
             {block("Joined: ", "13 September 2023", FcLink)}
             {block("Born on: ", myuser?.birthday ?? "", GiNewBorn)}
         </div>
@@ -56,3 +57,4 @@ function Usercard() {
 
 export default Usercard;
 ;
+

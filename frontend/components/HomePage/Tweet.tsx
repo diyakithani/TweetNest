@@ -34,6 +34,7 @@ export default function Tweet({ post }: TweetProps) {
                 <Text fz="lg" m={0} style={{ fontFamily: "monospace", fontWeight: "bolder" }}>
                     {post.username ?? "Anon"}
                 </Text>
+
             </Group>
 
             <Card.Section mt="0">
@@ -55,6 +56,7 @@ export default function Tweet({ post }: TweetProps) {
                     <IconShare style={{ width: '1rem', height: '1rem' }} color={theme.colors.blue[6]} />
                 </ActionIcon>
             </Group>
+
         </Card>
     );
 }
