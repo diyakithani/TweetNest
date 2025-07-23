@@ -7,7 +7,7 @@ import { stringToAlpha } from '@tsparticles/engine';
 
 
 const stats = [
-    { value: '34K', label: 'Followers' },
+    { value: {}, label: 'Followers' },
     { value: '187', label: 'Follows' },
     { value: '1.6K', label: 'Posts' },
 ];
